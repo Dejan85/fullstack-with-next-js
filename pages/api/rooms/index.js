@@ -1,7 +1,12 @@
 import nc from "next-connect";
 import dbConnect from "../../../config/dbConnect";
 
-import { getAllRooms, newRom } from "../../../controllers/roomController";
+import {
+  getAllRooms,
+  newRom,
+  updateRoom,
+  deleteRoom,
+} from "../../../controllers/roomController";
 
 const handler = nc();
 
@@ -9,5 +14,7 @@ const handler = nc();
 
 handler.get(getAllRooms);
 handler.post(newRom);
+handler.put(updateRoom);
+handler.delete(deleteRoom);
 
 export default handler;

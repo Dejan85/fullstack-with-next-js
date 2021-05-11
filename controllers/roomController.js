@@ -56,4 +56,58 @@ const getSingleRoom = async (req, res) => {
   }
 };
 
-export { getAllRooms, newRom, getSingleRoom };
+const updateRoom = async (req, res) => {
+  let room = await Room.findById(req.query.id);
+
+  if (!room) {
+    return res.status(404).json({
+      success: false,
+      error: "Room not found with this ID",
+    });
+  }
+
+  room = await Room.findByIdAndUpdate(req.query.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  try {
+    res.status(200).json({
+      success: true,
+      room,
+    });
+  } catch (error) {
+    error.status(200).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+const deleteRoom = async (req, res) => {
+  const room = await Room.findById(req.query.id);
+
+  if (!room) {
+    return res.status(404).json({
+      success: false,
+      error: "Room not found with this ID",
+    });
+  }
+
+  room.remove();
+
+  try {
+    res.status(200).json({
+      success: true,
+      message: "Room is deleted",
+    });
+  } catch (error) {
+    error.status(200).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+export { getAllRooms, newRom, getSingleRoom, updateRoom, deleteRoom };
