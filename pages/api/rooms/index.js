@@ -3,7 +3,7 @@ import dbConnect from "../../../config/dbConnect";
 import onError from "../../../middlewares/erros";
 
 import {
-  getAllRooms,
+  allRooms,
   newRom,
   updateRoom,
   deleteRoom,
@@ -13,7 +13,7 @@ const handler = nc({ onError });
 
 // dbConnect();
 
-handler.get(getAllRooms);
+handler.get(allRooms);
 handler.post(newRom);
 handler.put(updateRoom);
 handler.delete(deleteRoom);
