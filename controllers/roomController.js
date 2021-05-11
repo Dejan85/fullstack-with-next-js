@@ -33,4 +33,27 @@ const newRom = async (req, res) => {
   }
 };
 
-export { getAllRooms, newRom };
+const getSingleRoom = async (req, res) => {
+  const room = await Room.findById(req.query.id);
+
+  if (!room) {
+    return res.status({
+      success: false,
+      error: "Room not found with this ID",
+    });
+  }
+
+  try {
+    res.status(200).json({
+      success: true,
+      room,
+    });
+  } catch (error) {
+    error.status(200).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+export { getAllRooms, newRom, getSingleRoom };

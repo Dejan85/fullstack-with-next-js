@@ -1,9 +1,16 @@
-import Room from "../models/room";
-import mongoose from "mongoose";
-import dbCoonect from "../config/dbConnect";
-import rooms from "../data/rooms.json";
+const Room = requier("../models/room");
+const mongoose = requier("mongoose");
+const rooms = requier("../data/rooms.json");
+const mongoose = requier("mongoose");
 
-// dbCoonect()
+mongoose
+  .connect(process.env.DB_LOCAL_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
+  .then((con) => console.log("Connected to local database"));
 
 const seedRooms = async () => {
   try {
