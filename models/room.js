@@ -97,7 +97,7 @@ const roomSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    requierd: true,
+    requierd: false,
   },
   createdAt: {
     type: Date,
@@ -105,4 +105,4 @@ const roomSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model.Room || mongoose.model("Room", roomSchema);
+export default mongoose.models.Room || mongoose.model("Room", roomSchema);
